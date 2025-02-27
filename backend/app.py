@@ -7,27 +7,39 @@ from dotenv import load_dotenv
 # ✅ Load environment variables
 load_dotenv()
 
-# ✅ Fetch API Key correctly
+# ✅ Fetch API Key securely
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# ✅ Debugging print statements
+# ✅ Debugging - Check if API Key is loaded
+if not GEMINI_API_KEY:
+    raise ValueError("⚠️ Error: Missing GEMINI_API_KEY in .env file!")
+
 print(f"🔍 .env file loaded: {bool(GEMINI_API_KEY)}")
-print(f"🔑 GEMINI_API_KEY: {GEMINI_API_KEY[:5]}********")  # Hide most of the key for security
+print(f"🔑 GEMINI_API_KEY: {GEMINI_API_KEY[:5]}********")  # Hiding full key for security
 
 # ✅ Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable Cross-Origin Resource Sharing (CORS)
+CORS(app)  # Enable CORS for frontend access
 
 # ✅ Configure Google Gemini AI
-if GEMINI_API_KEY:
+try:
     genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-1.5-pro")  # Ensure model version is available
-else:
-    raise ValueError("⚠️ Missing GEMINI_API_KEY in .env file!")
+    model = genai.GenerativeModel("gemini-1.5-pro")
+except Exception as e:
+    print(f"⚠️ Error configuring Google AI: {e}")
+    model = None
 
-# ✅ API Route to Handle Chatbot Messages
+# ✅ Home Route
+@app.route("/", methods=["GET"])
+def home():
+    return "✅ Flask server is running! Use the /predict endpoint to chat with AI."
+
+# ✅ AI Chatbot Route
 @app.route("/predict", methods=["POST"])
 def predict():
+    if not model:
+        return jsonify({"reply": "⚠️ AI Model is not configured properly."}), 500
+
     try:
         data = request.json
         user_message = data.get("message", "").strip()
@@ -39,9 +51,9 @@ def predict():
         return jsonify({"reply": response.text})
 
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"❌ AI Error: {e}")
         return jsonify({"reply": "⚠️ AI chatbot encountered an error."}), 500
 
 # ✅ Run Flask Server
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=True)  # Runs on http://127.0.0.1:5000

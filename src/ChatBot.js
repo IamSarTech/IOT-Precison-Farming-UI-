@@ -18,7 +18,7 @@ export default function ChatBot() {
 
     try {
       const res = await axios.post(
-        "https://b1f8-2401-4900-6349-4dfc-b41a-73c8-7685-7a11.ngrok-free.app/predict",
+        "https://ad27-2401-4900-6338-f950-c458-20b2-8a63-db47.ngrok-free.app/predict",
         { message: message },
         { headers: { "Content-Type": "application/json" } }
       );
