@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import IoTController from "./components/IoTController";
 import Settings from "./components/Settings";
 import ChatBot from "./ChatBot"; // Import ChatBot component
+import SensorData from "./components/SensorData";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/iot-control" element={<IoTController />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/sensor-data" element={<SensorData />} />
         </Routes>
       </div>
       <ChatBot /> {/* Add Chatbot Button to All Pages */}

@@ -27,7 +27,7 @@ export default function Dashboard() {
         <div className="card">
           <h2>Sensor Data</h2>
           <p>Monitor real-time data from IoT sensors.</p>
-          <button className="control-button">View Data</button>
+          <button className="control-button"onClick={() => navigate("/sensor-data")}>View Data</button>
         </div>
         <div className="card">
           <h2>Device Control</h2>

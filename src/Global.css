@@ -14,7 +14,7 @@ body, html {
   text-align: center;
 }
 
-/* HEADER - Fixed like Footer */
+/* HEADER - Fixed */
 .header {
   position: fixed;
   top: 0;
@@ -26,6 +26,9 @@ body, html {
   text-align: center;
   font-size: 18px;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* LOGO */
@@ -37,7 +40,6 @@ body, html {
 /* Navigation Links */
 .nav-links {
   display: flex;
-  justify-content: center;
   gap: 20px;
 }
 
@@ -52,8 +54,8 @@ body, html {
   color: #1abc9c; /* Green hover effect */
 }
 
-/* HOME PAGE BACKGROUND */
-.home-container {
+/* MAIN CONTAINERS */
+.container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -63,50 +65,27 @@ body, html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
   position: relative;
 }
 
-/* Fix header gap issue */
-.home-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
-
-/* MAIN TITLE */
-.main-title {
+/* TITLES */
+.main-title, .dashboard-title {
   font-size: 10vw; /* Responsive font size */
   font-weight: bold;
   color: #205d22;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   text-align: center;
-  margin-top: 50px; /* Adjust spacing to avoid header overlap */
+  margin-top: 50px; /* Prevents overlap with header */
 }
 
-/* SUBTITLE */
-.subtitle {
+.subtitle, .dashboard-subtitle {
   font-size: 2vw;
   color: #3a7435;
   margin-top: 10px;
 }
 
-/* LEAF ICON */
-.leaf-icon {
-  font-size: 3vw;
-  margin-top: 20px;
-}
-
-/* FOOTER - Fixed at Bottom */
+/* FOOTER - Fixed */
 .footer {
   position: fixed;
   bottom: 0;
@@ -118,98 +97,217 @@ body, html {
   text-align: center;
 }
 
-/* DASHBOARD PAGE - SAME AS HOME PAGE */
-.dashboard-container {
+/* DASHBOARD CONTENT */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+}
+
+/* CARD STYLING */
+.card {
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* BUTTON STYLES */
+.control-button, .chatbot-send {
+  padding: 10px 15px;
+  border: none;
+  background-color: #205d22;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.control-button:hover, .chatbot-send:hover {
+  background-color: #1a4b1c;
+}
+
+/* CHATBOT STYLES */
+.chatbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 999;
+}
+
+.chatbot-toggle:hover {
+  background: #16a085;
+}
+
+.chatbot-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  max-width: 500px;
+  height: 60vh;
+  max-height: 500px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Chatbot Close Button */
+.chatbot-close {
+  position: absolute;
+  top: -28px;
+  right: 0px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Chatbot Messages */
+.chatbot-messages {
+  flex-grow: 1;
+  width: 100%;
+  overflow-y: auto;
+  max-height: 80%;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Chat Messages */
+.chat-message {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  display: flex;
+  text-align: justify; /* Justified text */
+}
+
+.chat-message.user {
+  background: #d1f7c4;
+  align-self: flex-end;
+}
+
+.chat-message.bot {
+  background: #e0e0e0;
+  align-self: flex-start;
+}
+
+/* Chatbot Input */
+.chatbot-input-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.chatbot-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chatbot-send {
+  padding: 8px 12px;
+  background: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home-container {
+  background-image: url("./assets/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Global background styles for full-page coverage */
+.home-container, .dashboard-container, .iot-container {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  /* Centers content vertically */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
-  position: relative;
+  text-align: center;
+  padding: 20px;
 }
 
-/* Fix header gap issue */
-.dashboard-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
+/* Background images */
+.home-container {
+  background-image: url("./assets/background.png"); /* Adjust the path */
 }
 
-/* DASHBOARD MAIN TITLE (SAME AS HOME) */
-.dashboard-title {
-  font-size: 10vw; /* Responsive */
+.dashboard-container {
+  background-image: url("./assets/background.png"); /* Adjust the path */
+}
+
+.iot-container {
+  background-image: url("./assets/background.png"); /* Adjust the path */
+}
+
+.main-title {
+  font-size: 10vw;  /* Responsive size */
   font-weight: bold;
   color: #205d22;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
-  text-align: center;
-  margin-top: 50px; /* Prevents overlap with header */
 }
 
-/* DASHBOARD SUBTITLE */
-.dashboard-subtitle {
+/* Subtitle */
+.subtitle {
   font-size: 2vw;
   color: #3a7435;
   margin-top: 10px;
 }
-
-/* DASHBOARD ICON */
-.dashboard-icon {
-  font-size: 3vw;
-  margin-top: 20px;
+.dashboard-content, .iot-content {
+  width: 90%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 50px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-/* HEADER STYLING */
-.header {
-  display: flex;
-  justify-content: space-between; /* Spacing between items */
-  align-items: center;
-  padding: 15px 30px;
-  background-color: #2c3e50; /* Dark blue-gray */
-  color: white;
+/* Additional Styling */
+.dashboard-content p, .iot-content p {
   font-size: 18px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000; /* Ensure it stays on top */
+  color: #2d572c;
+  line-height: 1.6;
 }
 
-/* LOGO STYLING */
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* NAVIGATION LINKS */
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  transition: 0.3s;
-}
-
-.nav-links a:hover {
-  color: #1abc9c; /* Green hover effect */
-}
-/* DASHBOARD CONTAINER */
+/* === DASHBOARD PAGE STYLING === */
 .dashboard-container {
   width: 100vw;
   height: 100vh;
@@ -217,13 +315,14 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url("./assets/background.png"); /* Update path if needed */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: #2d572c; /* Dark Green */
 }
 
-/* DASHBOARD HEADER */
+/* === DASHBOARD HEADER === */
 .dashboard-header {
   text-align: center;
   margin-bottom: 30px;
@@ -242,7 +341,7 @@ body, html {
   color: #3a7435;
 }
 
-/* DASHBOARD CONTENT */
+/* === DASHBOARD CONTENT (Cards Layout) === */
 .dashboard-content {
   display: flex;
   flex-direction: column; /* Arrange cards in a vertical list */
@@ -250,19 +349,133 @@ body, html {
   gap: 20px;
 }
 
-/* CARD STYLING */
-.card {
-  width: 400px; /* Adjust width as needed */
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
+/* === DASHBOARD CARDS === */
+.dashboard-card {
+  background: white;
+  width: 60%;
+  max-width: 600px;
   padding: 20px;
   text-align: center;
-  color: #205d22;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* IoT Control Page */
-.iot-container {
+.dashboard-card h2 {
+  font-size: 22px;
+  color: #205d22;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 18px;
+  color: #3a7435;
+}
+
+/* === BUTTON STYLING === */
+.dashboard-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #205d22;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.dashboard-button:hover {
+  background-color: #3a7435;
+}
+/* === IOT CONTROLLER PAGE STYLING === */
+.iot-controller-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("./assets/background.png"); /* Update path if needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #2d572c; /* Dark Green */
+}
+
+/* === PAGE HEADER === */
+.iot-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.iot-header h1 {
+  font-size: 80px;
+  font-weight: bold;
+  color: #205d22; /* Green */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+}
+
+.iot-header p {
+  font-size: 20px;
+  color: #3a7435;
+}
+
+/* === PAGE CONTENT (Cards Layout) === */
+.iot-content {
+  display: flex;
+  flex-direction: column; /* Arrange cards in a vertical list */
+  align-items: center;
+  gap: 20px;
+}
+
+/* === IOT CONTROL CARDS === */
+.iot-card {
+  background: white;
+  width: 60%;
+  max-width: 600px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.iot-card h2 {
+  font-size: 22px;
+  color: #205d22;
+  margin-bottom: 10px;
+}
+
+.iot-card p {
+  font-size: 18px;
+  color: #3a7435;
+}
+
+/* === BUTTON STYLING === */
+.iot-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #205d22;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.iot-button:hover {
+  background-color: #3a7435;
+}
+
+/* GLOBAL CONTAINER */
+.page-container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -272,104 +485,68 @@ body, html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  color: #2d572c; /* Dark Green */
 }
 
-/* Dashboard Content */
-.dashboard-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  width: 80%;
-  max-width: 500px;
-}
-
-/* Card Styling */
-.card {
-  width: 100%;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
+/* HEADER STYLE */
+.page-header {
   text-align: center;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
-/* Control Buttons */
-.control-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  border: none;
-  background-color: #205d22;
-  color: white;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
+.page-header h1 {
+  font-size: 80px;
+  font-weight: bold;
+  color: #205d22; /* Green */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
 }
 
-.control-button:hover {
-  background-color: #1a4b1c;
+.page-header p {
+  font-size: 20px;
+  color: #3a7435;
 }
 
-/* Chatbot Toggle Button */
-.chatbot-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #1abc9c;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+/* CONTENT AREA */
+.page-content {
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  align-items: center;
+  gap: 20px;
 }
 
-.chatbot-toggle:hover {
-  background-color: #16a085;
-}
-
-/* Chatbot Container */
-.chatbot-container {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 300px;
+/* CARD STYLE */
+.page-card {
   background: white;
-  padding: 15px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  z-index: 1000;
+  width: 350px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.chatbot-container textarea {
-  width: 100%;
-  height: 60px;
+.page-card h2 {
+  font-size: 24px;
+  color: #205d22;
   margin-bottom: 10px;
-  padding: 5px;
 }
 
-.chatbot-container button {
-  width: 100%;
-  padding: 8px;
-  background: #1abc9c;
+.page-card p {
+  font-size: 18px;
+  color: #3a7435;
+}
+
+/* BUTTON STYLE */
+.page-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background: #205d22;
   color: white;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-.chatbot-container button:hover {
-  background: #16a085;
+.page-button:hover {
+  background: #3a7435;
 }
-
-.chatbot-container button {
-  width: 100%;
-  padding: 8px;
-  background: #1abc9c;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 15px; /* Moves button upward */
-}
-
-
-
