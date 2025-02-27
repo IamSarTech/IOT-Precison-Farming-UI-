@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Global.css"; // Make sure this file exists
+import "../Global.css";
 
 export default function Header() {
   return (
@@ -9,7 +9,6 @@ export default function Header() {
       <nav className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
-        <Link to="/iot-control">IoT Control</Link>
         <Link to="/settings">Settings</Link>
       </nav>
     </header>

@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import IoTController from "./components/IoTController";
 import Settings from "./components/Settings";
+import ChatBot from "./ChatBot"; // Import ChatBot component
 
 export default function App() {
   return (
@@ -18,7 +18,7 @@ export default function App() {
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
-      <Footer />
+      <ChatBot /> {/* Add Chatbot Button to All Pages */}
     </Router>
   );
 }
